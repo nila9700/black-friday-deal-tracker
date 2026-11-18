@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Friday 2026 - Bästa Dealsen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0d0d0d;
+            color: #e5e5e7;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #1a1a1a;
+            border-bottom: 1px solid #2a2a2a;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .header-top {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 0;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .nav-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 32px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 48px 12px 20px;
+            border: 2px solid #2a2a2a;
+            border-radius: 24px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+            background: #0d0d0d;
+            color: #e5e5e7;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: #1a1a1a;
+        }
+
+        .search-box input::placeholder {
+            color: #666;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 18px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .search-icon:hover {
+            color: #5568d3;
+        }
+
+        .nav-categories {
+            background: #1a1a1a;
+            border-top: 1px solid #2a2a2a;
+            padding: 0;
+        }
+
+        .categories-list {
+            display: flex;
+            gap: 0;
+            list-style: none;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .category-item {
+            position: relative;
+        }
+
+        .category-btn {
+            padding: 16px 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            color: #e5e5e7;
+            font-family: 'Inter', sans-serif;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-btn:hover {
+            color: #667eea;
+        }
+
+        .subcategory-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .category-item:hover .subcategory-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .subcategory-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #e5e5e7;
+            transition: background 0.2s;
+        }
+
+        .subcategory-item:first-child {
+            border-radius: 12px 12px 0 0;
+        }
+
+        .subcategory-item:last-child {
+            border-radius: 0 0 12px 12px;
+        }
+
+        .subcategory-item:hover {
+            background: #2a2a2a;
+            color: #667eea;
+        }
+
+        .countdown-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .countdown-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .countdown-timer {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .countdown-box {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 16px 24px;
+            border-radius: 12px;
+            min-width: 80px;
+        }
+
+        .countdown-number {
+            font-size: 36px;
+            font-weight: 700;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        .top-stores {
+            background: #1a1a1a;
+            padding: 40px 24px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .top-stores-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .top-stores h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .stores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .store-card {
+            background: #0d0d0d;
+            border: 1px solid #2a2a2a;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .store-card:hover {
+            transform: translateY(-4px);
+            border-color: #667eea;
+        }
+
+        .store-rank {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            line-height: 40px;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .store-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .store-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .store-stat {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .store-stat strong {
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .page-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 1px solid #2a2a2a;
+            background: #1a1a1a;
+            color: #e5e5e7;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .deals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .deal-card {
+            background: #1a1a1a;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #2a2a2a;
+        }
+
+        .deal-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.3);
+        }
+
+        .deal-image {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+
+        .deal-content {
+            padding: 20px;
+        }
+
+        .deal-category {
+            font-size: 12px;
+            color: #667eea;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .deal-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #fff;
+            line-height: 1.3;
+        }
+
+        .deal-prices {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .deal-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .deal-original-price {
+            font-size: 18px;
+            color: #666;
+            text-decoration: line-through;
+        }
+
+        .deal-savings {
+            display: inline-block;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .deal-store {
+            font-size: 13px;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .modal-content {
+            background: #1a1a1a;
+            border-radius: 20px;
+            max-width: 1000px;
+            width: 100%;
+            position: relative;
+            margin: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            border: 1px solid #2a2a2a;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2a2a2a;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: #3a3a3a;
+        }
+
+        .modal-body {
+            padding: 40px;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .modal-image {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        .modal-info h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .modal-category {
+            font-size: 14px;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .modal-description {
+            color: #888;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .modal-prices {
+            margin-bottom: 24px;
+        }
+
+        .modal-price-label {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .modal-price-current {
+            font-size: 42px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .modal-price-original {
+            font-size: 24px;
+            color: #666;
+            text-decoration: line-through;
+        }
+
+        .modal-savings-badge {
+            display: inline-block;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+
+        .price-comparison {
+            margin: 40px 0;
+        }
+
+        .price-comparison h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+        }
+
+        .store-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .store-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: #0d0d0d;
+            border-radius: 12px;
+            transition: all 0.3s;
+            border: 1px solid #2a2a2a;
+        }
+
+        .store-item:hover {
+            background: #2a2a2a;
+        }
+
+        .store-item.best-price {
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px solid #667eea;
+        }
+
+        .store-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .store-name {
+            font-weight: 600;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .best-price-badge {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .store-stock {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .store-stock.in-stock {
+            color: #4caf50;
+        }
+
+        .store-stock.out-of-stock {
+            color: #f44336;
+        }
+
+        .store-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .store-link {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .store-link:hover {
+            background: #5568d3;
+        }
+
+        .price-history {
+            margin: 40px 0;
+        }
+
+        .price-history h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            background: #0d0d0d;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #2a2a2a;
+        }
+
+        @media (max-width: 768px) {
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-main {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .search-box {
+                margin: 0;
+                max-width: 100%;
+            }
+
+            .categories-list {
+                flex-wrap: wrap;
+            }
+
+            .countdown-timer {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-top" id="countdownBar">Black Friday 2026 startar snart!</div>
+        <div class="nav-container">
+            <nav class="nav-main">
+                <a class="logo" id="logoBtn"><span>⚡</span> Black Friday 2026</a>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Sök produkter, kategorier...">
+                    <span class="search-icon" id="searchBtn">🔍</span>
+                </div>
+            </nav>
+        </div>
+        <nav class="nav-categories">
+            <ul class="categories-list" id="categoriesNav">
+                <li class="category-item">
+                    <button class="category-btn" id="allDealsBtn">Alla Deals</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="countdown-section">
+        <h1 class="countdown-title">Black Friday 2026</h1>
+        <div class="countdown-timer" id="countdown">
+            <div class="countdown-box">
+                <span class="countdown-number" id="days">0</span>
+                <span class="countdown-label">Dagar</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="hours">0</span>
+                <span class="countdown-label">Timmar</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="minutes">0</span>
+                <span class="countdown-label">Minuter</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="seconds">0</span>
+                <span class="countdown-label">Sekunder</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="top-stores">
+        <div class="top-stores-container">
+            <h2>🏆 Topp 5 Butiker Med Bäst Erbjudanden</h2>
+            <div class="stores-grid" id="topStoresGrid"></div>
+        </div>
+    </section>
+
+    <main class="container">
+        <h1 class="page-title" id="pageTitle">Topprankade Deals</h1>
+        <p class="page-subtitle" id="pageSubtitle">Jämför priser och hitta de bästa erbjudandena</p>
+
+        <div class="filter-bar">
+            <button class="filter-btn active" data-sort="best">Bästa Dealen</button>
+            <button class="filter-btn" data-sort="price-low">Lägsta Pris</button>
+            <button class="filter-btn" data-sort="price-high">Högsta Pris</button>
+            <button class="filter-btn" data-sort="discount">Högsta Rabatt</button>
+        </div>
+
+        <div class="deals-grid" id="dealsGrid"></div>
+    </main>
+
+    <div class="modal" id="dealModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalCloseBtn">×</button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        let allDeals = [];
+        let currentDeal = null;
+        let priceChart = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing...');
+
+            loadCategories();
+            loadAllDeals();
+            loadTopStores();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+
+            console.log('Search elements:', {searchInput, searchBtn});
+
+            let searchTimeout;
+
+            function performSearch() {
+                const query = searchInput.value.trim();
+                console.log('performSearch called, query:', query);
+                if (query.length === 0) {
+                    loadAllDeals();
+                    return;
+                }
+                if (query.length >= 2) {
+                    searchDeals(query);
+                }
+            }
+
+            if (searchInput && searchBtn) {
+                searchInput.addEventListener('input', function(e) {
+                    clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(performSearch, 300);
+                });
+
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        performSearch();
+                    }
+                });
+
+                searchBtn.addEventListener('click', function(e) {
+                    console.log('Search button clicked!');
+                    e.preventDefault();
+                    e.stopPropagation();
+                    performSearch();
+                });
+            } else {
+                console.error('Search elements not found!');
+            }
+
+            // Logo and all deals button
+            const logoBtn = document.getElementById('logoBtn');
+            const allDealsBtn = document.getElementById('allDealsBtn');
+
+            if (logoBtn) {
+                logoBtn.addEventListener('click', function(e) {
+                    console.log('Logo clicked');
+                    e.preventDefault();
+                    loadAllDeals();
+                });
+            }
+
+            if (allDealsBtn) {
+                allDealsBtn.addEventListener('click', function(e) {
+                    console.log('All deals button clicked');
+                    e.preventDefault();
+                    loadAllDeals();
+                });
+            }
+
+            // Modal close
+            document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+            document.getElementById('dealModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const sortBy = this.getAttribute('data-sort');
+                    sortDeals(sortBy);
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+
+        async function loadCategories() {
+            try {
+                const response = await fetch('/categories');
+                const categories = await response.json();
+
+                const nav = document.getElementById('categoriesNav');
+                const allDealsBtn = nav.innerHTML;
+                nav.innerHTML = allDealsBtn;
+
+                for (const [category, data] of Object.entries(categories)) {
+                    const li = document.createElement('li');
+                    li.className = 'category-item';
+                    li.innerHTML = `
+                        <button class="category-btn">${data.icon} ${category}</button>
+                        <div class="subcategory-dropdown">
+                            <div class="subcategory-item" data-category="${category}">Alla ${category}</div>
+                            ${data.subcategories.map(sub => `
+                                <div class="subcategory-item" data-category="${category}" data-subcategory="${sub}">${sub}</div>
+                            `).join('')}
+                        </div>
+                    `;
+                    nav.appendChild(li);
+
+                    li.querySelectorAll('.subcategory-item').forEach(item => {
+                        item.addEventListener('click', function() {
+                            const cat = this.getAttribute('data-category');
+                            const subcat = this.getAttribute('data-subcategory');
+                            filterByCategory(cat, subcat);
+                        });
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading categories:', error);
+            }
+        }
+
+        async function loadAllDeals() {
+            try {
+                const response = await fetch('/deals');
+                const data = await response.json();
+
+                // Sortera med Levi's, Apple, Nike först
+                allDeals = data.deals.sort((a, b) => {
+                    // Prioritera Levi's, Apple, Nike högst
+                    const topBrands = ['Levi', 'Apple', 'MacBook', 'iPhone', 'iPad', 'AirPods', 'Nike'];
+                    const secondTier = ['Samsung', 'Sony', 'PlayStation', 'Dyson'];
+
+                    const aIsTop = topBrands.some(brand => a.name.includes(brand)) ? 100 : 0;
+                    const bIsTop = topBrands.some(brand => b.name.includes(brand)) ? 100 : 0;
+
+                    const aIsSecond = secondTier.some(brand => a.name.includes(brand)) ? 50 : 0;
+                    const bIsSecond = secondTier.some(brand => b.name.includes(brand)) ? 50 : 0;
+
+                    // Beräkna poäng
+                    const aScore = aIsTop + aIsSecond + a.savings_percent;
+                    const bScore = bIsTop + bIsSecond + b.savings_percent;
+
+                    return bScore - aScore;
+                });
+
+                displayDeals(allDeals);
+                document.getElementById('pageTitle').textContent = '🔥 HOT DEALS';
+                document.getElementById('pageSubtitle').textContent = `${data.count} produkter med fantastiska erbjudanden`;
+                document.getElementById('searchInput').value = '';
+            } catch (error) {
+                console.error('Error loading deals:', error);
+            }
+        }
+
+        async function filterByCategory(category, subcategory = null) {
+            try {
+                let url = `/deals/category/${encodeURIComponent(category)}`;
+                if (subcategory) {
+                    url += `?subcategory=${encodeURIComponent(subcategory)}`;
+                }
+                const response = await fetch(url);
+                const data = await response.json();
+                allDeals = data.deals;
+                displayDeals(allDeals);
+                document.getElementById('pageTitle').textContent = subcategory || category;
+                document.getElementById('pageSubtitle').textContent = `${data.count} produkter`;
+                document.getElementById('searchInput').value = '';
+            } catch (error) {
+                console.error('Error filtering deals:', error);
+            }
+        }
+
+        async function searchDeals(query) {
+            try {
+                console.log('Hämtar sökresultat för:', query);
+                const response = await fetch(`/deals/search?q=${encodeURIComponent(query)}`);
+                const data = await response.json();
+                console.log('Sökresultat:', data);
+                allDeals = data.results;
+                displayDeals(allDeals);
+                document.getElementById('pageTitle').textContent = `Sökresultat för "${query}"`;
+                document.getElementById('pageSubtitle').textContent = `${data.count} produkter hittades`;
+            } catch (error) {
+                console.error('Error searching deals:', error);
+            }
+        }
+
+        function sortDeals(sortBy) {
+            let sorted = [...allDeals];
+            switch(sortBy) {
+                case 'best':
+                    sorted.sort((a, b) => b.savings_percent - a.savings_percent);
+                    break;
+                case 'price-low':
+                    sorted.sort((a, b) => a.deal_price - b.deal_price);
+                    break;
+                case 'price-high':
+                    sorted.sort((a, b) => b.deal_price - a.deal_price);
+                    break;
+                case 'discount':
+                    sorted.sort((a, b) => b.savings_percent - a.savings_percent);
+                    break;
+            }
+            displayDeals(sorted);
+        }
+
+        function displayDeals(deals) {
+            const grid = document.getElementById('dealsGrid');
+            if (deals.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888;">Inga produkter hittades</p>';
+                return;
+            }
+            grid.innerHTML = deals.map(deal => `
+                <div class="deal-card" data-deal-id="${deal.id}">
+                    <img src="${deal.image_url}" alt="${deal.name}" class="deal-image">
+                    <div class="deal-content">
+                        <div class="deal-category">${deal.subcategory}</div>
+                        <h3 class="deal-name">${deal.name}</h3>
+                        <div class="deal-prices">
+                            <span class="deal-price">${formatPrice(deal.deal_price)}</span>
+                            <span class="deal-original-price">${formatPrice(deal.original_price)}</span>
+                        </div>
+                        <div class="deal-savings">Spara ${formatPrice(deal.savings_kr)} (${deal.savings_percent}%)</div>
+                        <div class="deal-store">Från ${deal.best_store}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.querySelectorAll('.deal-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const dealId = parseInt(this.getAttribute('data-deal-id'));
+                    openDealModal(dealId);
+                });
+            });
+        }
+
+        async function openDealModal(dealId) {
+            try {
+                const response = await fetch(`/deals/${dealId}`);
+                currentDeal = await response.json();
+
+                const modalBody = document.getElementById('modalBody');
+                modalBody.innerHTML = `
+                    <div class="modal-grid">
+                        <div>
+                            <img src="${currentDeal.image_url}" alt="${currentDeal.name}" class="modal-image">
+                        </div>
+                        <div class="modal-info">
+                            <div class="modal-category">${currentDeal.category} > ${currentDeal.subcategory}</div>
+                            <h2>${currentDeal.name}</h2>
+                            <p class="modal-description">${currentDeal.description || ''}</p>
+                            <div class="modal-prices">
+                                <div class="modal-price-label">Bästa pris</div>
+                                <div class="modal-price-current">${formatPrice(currentDeal.deal_price)}</div>
+                                <span class="modal-price-original">${formatPrice(currentDeal.original_price)}</span>
+                                <div class="modal-savings-badge">
+                                    Spara ${formatPrice(currentDeal.savings_kr)} (${currentDeal.savings_percent}%)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-comparison">
+                        <h3>🏪 Prisjämförelse</h3>
+                        <div class="store-list">
+                            ${currentDeal.stores.sort((a, b) => a.price - b.price).map((store, index) => `
+                                <div class="store-item ${index === 0 ? 'best-price' : ''}">
+                                    <div class="store-info">
+                                        <div>
+                                            <div class="store-name">
+                                                ${store.store}
+                                                ${index === 0 ? '<span class="best-price-badge">Bästa pris</span>' : ''}
+                                            </div>
+                                            <div class="store-stock ${store.in_stock ? 'in-stock' : 'out-of-stock'}">
+                                                ${store.in_stock ? '✓ I lager' : '✗ Ej i lager'}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 20px;">
+                                        <div class="store-price">${formatPrice(store.price)}</div>
+                                        ${store.in_stock ? `<a href="${store.url}" target="_blank" class="store-link">Köp</a>` : ''}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="price-history">
+                        <h3>📈 Prishistorik (30 dagar)</h3>
+                        <div class="chart-container">
+                            <canvas id="priceChart"></canvas>
+                        </div>
+                    </div>
+                `;
+
+                createPriceChart(currentDeal.price_history);
+                document.getElementById('dealModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } catch (error) {
+                console.error('Error loading deal:', error);
+            }
+        }
+
+        function createPriceChart(priceHistory) {
+            const ctx = document.getElementById('priceChart').getContext('2d');
+            if (priceChart) priceChart.destroy();
+
+            const dates = priceHistory.map(h => h.date);
+            const prices = priceHistory.map(h => h.price);
+
+            priceChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Pris (kr)',
+                        data: prices,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        pointHoverRadius: 6,
+                        pointHoverBackgroundColor: '#667eea',
+                        pointHoverBorderColor: '#fff',
+                        pointHoverBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                            padding: 12,
+                            cornerRadius: 8,
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            callbacks: {
+                                title: function(context) {
+                                    return context[0].label;
+                                },
+                                label: function(context) {
+                                    return 'Pris: ' + formatPrice(context.parsed.y);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: false,
+                            grid: { display: false }
+                        },
+                        y: {
+                            display: true,
+                            grid: { color: '#2a2a2a' },
+                            ticks: {
+                                color: '#888',
+                                callback: function(value) { return formatPrice(value); },
+                                font: { family: 'Inter' }
+                            }
+                        }
+                    },
+                    interaction: { mode: 'nearest', axis: 'x', intersect: false }
+                }
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('dealModal').classList.remove('active');
+            document.body.style.overflow = '';
+            if (priceChart) {
+                priceChart.destroy();
+                priceChart = null;
+            }
+        }
+
+        async function loadTopStores() {
+            try {
+                const response = await fetch('/deals');
+                const data = await response.json();
+
+                const storeStats = {};
+
+                // Räkna rabatt för varje butik baserat på deras faktiska priser
+                data.deals.forEach(deal => {
+                    deal.stores.forEach(store => {
+                        if (!storeStats[store.store]) {
+                            storeStats[store.store] = {
+                                name: store.store,
+                                dealCount: 0,
+                                totalDiscount: 0,
+                                maxDiscount: 0
+                            };
+                        }
+
+                        // Räkna rabatten baserat på denna butiks pris
+                        const savings = deal.original_price - store.price;
+                        const discount = (savings / deal.original_price) * 100;
+
+                        storeStats[store.store].dealCount++;
+                        storeStats[store.store].totalDiscount += discount;
+
+                        if (discount > storeStats[store.store].maxDiscount) {
+                            storeStats[store.store].maxDiscount = discount;
+                        }
+                    });
+                });
+
+                const stores = Object.values(storeStats).map(store => {
+                    store.avgDiscount = store.totalDiscount / store.dealCount;
+                    return store;
+                }).sort((a, b) => b.avgDiscount - a.avgDiscount).slice(0, 5);
+
+                displayTopStores(stores);
+            } catch (error) {
+                console.error('Error loading top stores:', error);
+            }
+        }
+
+        function displayTopStores(stores) {
+            const grid = document.getElementById('topStoresGrid');
+            grid.innerHTML = stores.map((store, index) => `
+                <div class="store-card">
+                    <div class="store-rank">${index + 1}</div>
+                    <h3>${store.name}</h3>
+                    <div class="store-stats">
+                        <div class="store-stat">
+                            <span>Genomsnittlig rabatt:</span>
+                            <strong>${store.avgDiscount.toFixed(0)}%</strong>
+                        </div>
+                        <div class="store-stat">
+                            <span>Upp till:</span>
+                            <strong>${store.maxDiscount.toFixed(0)}% rabatt</strong>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function updateCountdown() {
+            try {
+                const response = await fetch('/countdown');
+                const data = await response.json();
+
+                if (data.expired) {
+                    document.getElementById('countdownBar').textContent = data.message;
+                    return;
+                }
+
+                document.getElementById('days').textContent = data.days;
+                document.getElementById('hours').textContent = String(data.hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(data.minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(data.seconds).padStart(2, '0');
+            } catch (error) {
+                console.error('Error updating countdown:', error);
+            }
+        }
+
+        function formatPrice(price) {
+            return new Intl.NumberFormat('sv-SE', {
+                style: 'currency',
+                currency: 'SEK',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(price);
+        }
+    </script>
+</body>
+</html>
