@@ -1,7 +1,6 @@
 """
 Unit tests for deals.py business logic functions.
 """
-import pytest
 from datetime import datetime
 from app.deals import (
     get_all_deals,
