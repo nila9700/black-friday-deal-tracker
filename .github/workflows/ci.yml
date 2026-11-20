@@ -24,7 +24,14 @@ jobs:
         run: ruff check .
 
       - name: Run tests
-        run: pytest -v
+        run: pytest -v --junitxml=test-results.xml
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results.xml
 
   docker:
     needs: test
@@ -42,4 +49,12 @@ jobs:
         run: sleep 3
 
       - name: Verify deployment
-        run: bash scripts/verify.sh
+        shell: bash
+        run: bash scripts/verify.sh | tee verify-log.txt
+
+      - name: Upload verification log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verification-log
+          path: verify-log.txt
