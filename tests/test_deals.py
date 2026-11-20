@@ -229,3 +229,8 @@ def test_add_deal_with_default_values():
 
     # Clean up
     deals_db.pop()
+
+
+def test_intentionally_broken():
+    """Temporary test to prove the quality gate blocks broken code."""
+    assert 1 == 2
