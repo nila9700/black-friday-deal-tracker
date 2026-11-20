@@ -80,8 +80,9 @@ def test_get_deal_legit_returns_assessment():
     data = response.json()
     assert "status" in data
     assert "message" in data
-    assert "discount" in data
-    assert "deal" in data
+    assert "discount_percent" in data
+    assert "deal_id" in data
+    assert "deal_name" in data
 
     # Status should be one of: legit, check, suspicious
     assert data["status"] in ["legit", "check", "suspicious"]
@@ -123,14 +124,13 @@ def test_get_categories_returns_category_list():
     assert response.status_code == 200
 
     data = response.json()
-    assert "categories" in data
-    assert isinstance(data["categories"], list)
+    assert isinstance(data, dict)
 
-    # Each category should have name and subcategories
-    for category in data["categories"]:
-        assert "name" in category
-        assert "subcategories" in category
-        assert isinstance(category["subcategories"], list)
+    # Each value should be a dict with subcategories key
+    for category_name, category_data in data.items():
+        assert isinstance(category_data, dict)
+        assert "subcategories" in category_data
+        assert isinstance(category_data["subcategories"], list)
 
 
 def test_search_deals_with_query_returns_results():
@@ -220,10 +220,10 @@ def test_post_new_deal_creates_deal():
     deal = data["deal"]
     assert deal["name"] == "Test Product API"
     assert deal["original_price"] == 1500.0
-    assert deal["price"] == 1200.0
+    assert deal["deal_price"] == 1200.0
     assert deal["category"] == "Electronics"
     assert deal["subcategory"] == "Laptops"
-    assert deal["store"] == "Test Store API"
+    assert deal["best_store"] == "Test Store API"
 
 
 def test_post_new_deal_with_missing_fields_returns_422():
@@ -249,7 +249,8 @@ def test_compare_deals_returns_comparison():
 
     data = response.json()
     assert "deals" in data
-    assert "best_deal" in data
+    assert "best_by_kr" in data
+    assert "best_by_percent" in data
     assert isinstance(data["deals"], list)
     assert len(data["deals"]) == 3
 
