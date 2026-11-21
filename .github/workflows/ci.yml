@@ -10,10 +10,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
@@ -32,12 +32,13 @@ jobs:
         with:
           name: test-results
           path: test-results.xml
+          if-no-files-found: error
 
   docker:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Build Docker image
         run: docker build -t deal-tracker .
@@ -58,3 +59,4 @@ jobs:
         with:
           name: verification-log
           path: verify-log.txt
+          if-no-files-found: error
