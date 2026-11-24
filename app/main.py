@@ -173,3 +173,4 @@ if os.path.exists(static_path):
     def read_root():
         """Serve the frontend."""
         return FileResponse(os.path.join(static_path, "index.html"))
+# Live demo update
