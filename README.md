@@ -418,3 +418,6 @@ For questions, issues, or suggestions, please open an issue on GitHub.
 ---
 
 **Note**: This is an educational project demonstrating modern DevOps practices including Docker, CI/CD, automated testing, and deployment automation. The deals and prices are fictional and for demonstration purposes only.
+
+## Pipeline Status
+CI/CD pipeline powered by GitHub Actions.
